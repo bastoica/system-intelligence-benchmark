@@ -2,7 +2,7 @@
 
 set -e  # Exit immediately on error.
 
-source .venv/bin/activate
+source envexamplebench/bin/activate
 pytest --version
 pytest
 deactivate

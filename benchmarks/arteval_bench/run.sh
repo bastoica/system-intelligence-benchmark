@@ -2,10 +2,9 @@
 
 set -e  # Exit immediately on error.
 
-if [ $# -lt 1 ] || [ $# -gt 2 ]; then
-    echo "Usage: $0 <model_location> <agent>"
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <model_location>"
     echo "Example: $0 Qwen/Qwen2.5-7B-Instruct"
-    echo "Note: agent parameter is accepted for consistency but not used by this benchmark"
     exit 1
 fi
 
@@ -20,19 +19,11 @@ NEW_MODEL_NAME="${MODEL_NAME//\//_}"
 # export OPENAI_API_KEY="EMPTY"
 
 source .venv/bin/activate
-echo "==> Start to run ArtEvalBench"
+echo "==> Start to run ExampleBench"
 # Note that if you benchmark has multiple tasks, you need to add --task <task> 
 # in your code to enable task selection.
-# sweagent --help
-# python src/main.py \
-#     --task "test"
-    # --save_path "./outputs/systemcourseproject__${NEW_MODEL_NAME}__$(date +"%Y-%m-%d_%H-%M-%S")" \
-
-python src/main_setup.py
-    # --model "$MODEL_NAME" \
-    # --save_path "./outputs/systemcourseproject__${NEW_MODEL_NAME}__$(date +"%Y-%m-%d_%H-%M-%S")" \
-
-# python src/main_setup.py \
-#     --input_json "./data/benchmark/course_lab_task_examples.jsonl" 
-
+python src/main.py \
+    --model_name "${MODEL_NAME}"
+    # --save_path "./outputs/examplebench__${NEW_MODEL_NAME}__$(date +"%Y-%m-%d_%H-%M-%S")" \
+    
 deactivate
